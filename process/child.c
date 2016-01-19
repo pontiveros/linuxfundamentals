@@ -18,7 +18,7 @@
 
 void fakeworker() {
 	int n = 0;
-	for (n = 0; n < 20; n++) {
+	for (n = 0; n < 5; n++) {
 		printf("working line number %d\n", (n + 1));
 		sleep(1);
 	}
@@ -33,17 +33,17 @@ int main(int argc, char *argv[]) {
 		exit(EXIT_FAILURE);
 
 	} else if (child == 0) {
-		puts("Child process");
+		puts("\nChild process");
 		printf("PID: %d\n", getpid());
-		printf("PPID: %d\n", getppid());
-		fakeworker();
+		printf("PPID: %d\n", getppid()); 
+		/* if the parent process id is equal 1, means that parent process already finished when child asked for getppid() */
 		exit(EXIT_SUCCESS);
 
 	} else {
 		puts("Parent process");
 		printf("PID: %d\n", getpid());
 		printf("PPID: %d\n", getppid());
-		/* fakeworker(); */
+		fakeworker(); /* only for delay the parent process */
 	}
 
 	exit(EXIT_SUCCESS);
