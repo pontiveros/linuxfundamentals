@@ -10,6 +10,10 @@
 
 **/
 
+/********************************/
+/****** TCP/IP Programing *******/
+/* This program should work in linux, unix or windows */
+/********************************/
 
 #include <stdio.h>
 #include <stdlib.h>
