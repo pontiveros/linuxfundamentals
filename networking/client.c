@@ -18,10 +18,14 @@
 #include <arpa/inet.h>
 #include <string.h>
 
+
+#define MAX_STRING 256
+
 int main(int argc, char *argv[]) {
 	int _socket;
 	struct sockaddr_in _client; /* Estructura de socket proceso cliente */
 	socklen_t size_addr;
+	char buffer[MAX_STRING];
 
 	if (argc != 2) {
 		perror("ERROR: arguments wrong.");
@@ -49,11 +53,16 @@ int main(int argc, char *argv[]) {
 		exit(EXIT_FAILURE);
 	}
 
+	memset(buffer, 0, sizeof(char) * MAX_STRING);
 	puts("Connected to TCP/IP socket.");
 	printf("Port: %d\n", ntohs(_client.sin_port));
 	printf("Address: %s\n", inet_ntoa(_client.sin_addr));
 
-	fwrite(_socket ,fileno(stdin));
-
+	printf("Write your message: ");
+	gets(buffer);
+	if (strlen(buffer) > 0) {
+		write(_socket, buffer, strlen(buffer));
+	}
+	
 	exit(EXIT_SUCCESS);
 }

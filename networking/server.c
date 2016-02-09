@@ -23,12 +23,14 @@
 #include <netinet/in.h>
 #include <unistd.h>
 
+#define MAX_STRING 		256
+#define END_CONNECTION "eof"
 
 int main(int argc, char *argv[]) {
 	int 	sockfd, newsockfd, port;
 	struct sockaddr_in server_addr, client_addr;
 	socklen_t client_len;
-	char buffer[256];
+	char buffer[MAX_STRING];
 	int n; // read chars from remote connection.
 
 	if (argc < 2) {
@@ -61,13 +63,16 @@ int main(int argc, char *argv[]) {
 		exit(EXIT_FAILURE);	
 	}
 
-	bzero(buffer, 256);
-	n = read(newsockfd, buffer, 256);
-	if (n < 0) {
-		perror("ERROR: reading socket.");
-	} else {
-		printf("Remote Message: %s\n", buffer);
-	}
+	do {
+		bzero(buffer, MAX_STRING); /* Check for this function. */ 	
+		n = read(newsockfd, buffer, MAX_STRING);
+		if (n < 0) {
+			perror("ERROR: reading socket.");
+			break;
+		} else {
+			printf("Remote Message: %s\n", buffer);
+		}
+	} while (strncmp(buffer, END_CONNECTION, 3) != 0);
 
 	close(sockfd);
 	close(newsockfd);
