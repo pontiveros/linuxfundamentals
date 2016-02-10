@@ -58,11 +58,14 @@ int main(int argc, char *argv[]) {
 	printf("Port: %d\n", ntohs(_client.sin_port));
 	printf("Address: %s\n", inet_ntoa(_client.sin_addr));
 
-	printf("Write your message: ");
-	gets(buffer);
-	if (strlen(buffer) > 0) {
-		write(_socket, buffer, strlen(buffer));
-	}
-	
+	do {
+		printf("Write your message: ");
+		gets(buffer);
+
+		if (strlen(buffer) > 0) {
+			write(_socket, buffer, strlen(buffer));
+		}
+	} while (1);
+		
 	exit(EXIT_SUCCESS);
 }

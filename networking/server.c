@@ -64,13 +64,14 @@ int main(int argc, char *argv[]) {
 	}
 
 	do {
-		bzero(buffer, MAX_STRING); /* Check for this function. */ 	
+		/* bzero(buffer, MAX_STRING); */ /* Check for this function. */
+		memset(buffer, 0, MAX_STRING);
 		n = read(newsockfd, buffer, MAX_STRING);
 		if (n < 0) {
 			perror("ERROR: reading socket.");
 			break;
 		} else {
-			printf("Remote Message: %s\n", buffer);
+			printf("Remote Message: %s", buffer);
 		}
 	} while (strncmp(buffer, END_CONNECTION, 3) != 0);
 
