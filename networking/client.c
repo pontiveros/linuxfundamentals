@@ -59,12 +59,18 @@ int main(int argc, char *argv[]) {
 	printf("Address: %s\n", inet_ntoa(_client.sin_addr));
 
 	do {
+		fflush(stdin);
 		printf("Write your message: ");
 		gets(buffer);
 
 		if (strlen(buffer) > 0) {
-			write(_socket, buffer, strlen(buffer));
+			if (strncmp(buffer, "eof", 3) != 0) {
+				break;
+			}
+			send(_socket, buffer, strlen(buffer) * sizeof(char), 0);
+			/* write(_socket, buffer, strlen(buffer)); */
 		}
+
 	} while (1);
 		
 	exit(EXIT_SUCCESS);

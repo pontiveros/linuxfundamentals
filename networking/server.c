@@ -63,9 +63,10 @@ int main(int argc, char *argv[]) {
 		exit(EXIT_FAILURE);	
 	}
 
+	memset(buffer, 0, MAX_STRING);
 	do {
 		/* bzero(buffer, MAX_STRING); */ /* Check for this function. */
-		memset(buffer, 0, MAX_STRING);
+			
 		n = read(newsockfd, buffer, MAX_STRING);
 		if (n < 0) {
 			perror("ERROR: reading socket.");
