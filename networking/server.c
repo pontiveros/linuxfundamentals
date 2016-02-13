@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
 	struct sockaddr_in server_addr, client_addr;
 	socklen_t client_len;
 	char buffer[MAX_STRING];
-	int n; // read chars from remote connection.
+	int bytes; // read chars from remote connection.
 
 	if (argc < 2) {
 		perror("ERROR: port has not been provided.");
@@ -64,17 +64,19 @@ int main(int argc, char *argv[]) {
 	}
 
 	memset(buffer, 0, MAX_STRING);
-	do {
+ 	/* do { */
 		/* bzero(buffer, MAX_STRING); */ /* Check for this function. */
-			
-		n = read(newsockfd, buffer, MAX_STRING);
-		if (n < 0) {
+		bytes = recv(newsockfd, buffer, MAX_STRING, 0);
+		buffer[bytes] = '\0';
+
+		/* n = read(newsockfd, buffer, MAX_STRING); */
+		if (bytes < 0) {
 			perror("ERROR: reading socket.");
-			break;
 		} else {
 			printf("Remote Message: %s", buffer);
+			printf("Bytes: %d", bytes);
 		}
-	} while (strncmp(buffer, END_CONNECTION, 3) != 0);
+	/* } while (strncmp(buffer, END_CONNECTION, 3) != 0); */
 
 	close(sockfd);
 	close(newsockfd);
