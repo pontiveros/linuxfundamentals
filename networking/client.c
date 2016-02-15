@@ -22,12 +22,12 @@
 #define MAX_STRING 256
 
 int main(int argc, char *argv[]) {
-	int _socket;
+	int _socket, bytesSent;
 	struct sockaddr_in _client; /* Estructura de socket proceso cliente */
 	socklen_t size_addr;
 	char buffer[MAX_STRING];
 
-	if (argc != 2) {
+	if (argc != 3) {
 		perror("ERROR: arguments wrong.");
 		exit(EXIT_FAILURE);
 	}
@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
 
 	memset(&_client, 0, sizeof(_client));
 	_client.sin_family = AF_INET;
-	_client.sin_port   = htons(9000); /* setear el orden de bytes de la red */
+	_client.sin_port   = htons(atoi(argv[2])); /* setear el orden de bytes de la red */
 
 	if (!(inet_aton(argv[1], &_client.sin_addr))) {
 		perror("ERROR: trying to set the address.");
@@ -64,14 +64,15 @@ int main(int argc, char *argv[]) {
 		gets(buffer);
 
 		if (strlen(buffer) > 0) {
-			if (strncmp(buffer, "eof", 3) != 0) {
+			printf("sending...\n");
+			bytesSent = send(_socket, buffer, strlen(buffer) * sizeof(char), 0);
+			printf("bytes: %d\n", bytesSent);
+
+			if (strncmp(buffer, "eof", 3) == 0) {
 				break;
 			}
-			send(_socket, buffer, strlen(buffer) * sizeof(char), 0);
-			/* write(_socket, buffer, strlen(buffer)); */
 		}
-
 	} while (1);
-		
+
 	exit(EXIT_SUCCESS);
 }

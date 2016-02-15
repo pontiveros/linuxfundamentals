@@ -23,7 +23,7 @@
 #include <netinet/in.h>
 #include <unistd.h>
 
-#define MAX_STRING 		256
+#define MAX_STRING 		255
 #define END_CONNECTION "eof"
 
 int main(int argc, char *argv[]) {
@@ -64,19 +64,21 @@ int main(int argc, char *argv[]) {
 	}
 
 	memset(buffer, 0, MAX_STRING);
- 	/* do { */
+ 	do {
 		/* bzero(buffer, MAX_STRING); */ /* Check for this function. */
-		bytes = recv(newsockfd, buffer, MAX_STRING, 0);
-		buffer[bytes] = '\0';
+		/*bytes = recv(newsockfd, &buffer, MAX_STRING, 0);
+		buffer[bytes] = '\0';*/
 
-		/* n = read(newsockfd, buffer, MAX_STRING); */
+		bytes = read(newsockfd, buffer, MAX_STRING);
+		buffer[bytes] = '\0';
+		
 		if (bytes < 0) {
 			perror("ERROR: reading socket.");
 		} else {
-			printf("Remote Message: %s", buffer);
-			printf("Bytes: %d", bytes);
+			printf("Remote Message: %s\n", buffer);
+			printf("Bytes: %d\n", bytes);
 		}
-	/* } while (strncmp(buffer, END_CONNECTION, 3) != 0); */
+	} while (strncmp(buffer, END_CONNECTION, 3) != 0);
 
 	close(sockfd);
 	close(newsockfd);
