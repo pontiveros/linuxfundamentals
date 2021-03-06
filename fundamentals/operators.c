@@ -22,6 +22,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "utils.h"
 
 int mainMenu() {
     int option = 0;
@@ -68,13 +69,7 @@ int performOperation(int option) {
     return c;
 }
 
-void cleanScreen() {
-    int i = 0;
-    for (i = 0; i < 100; i++) {
-        printf("\n");
-    }
-    fflush(stdout);
-}
+
 
 int main () {
     /* Basic Arithmetic Operators */
