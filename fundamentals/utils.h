@@ -12,5 +12,8 @@
 
 void cleanScreen();
 int selectMenu(const char *items[], int len);
+void quicksort(int number[25],int first,int last);
+void sortByExchange(int items[], int len);
+void printArrayInteger(int items[], int len);
 
 #endif // __UTILS_H_20210305__

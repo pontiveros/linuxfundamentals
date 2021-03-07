@@ -39,7 +39,21 @@ char* generateStrings(int lengh) {
 }
 
 void testArrayInteger() {
-    printf("Testing array of integer.\n");
+    int i = 0;
+    /*int l = rand() / 1000;*/
+    int l = 10;
+    int *ptr = (int*)malloc(sizeof(int) * l);
+
+    printf("Array Integer unsorted:\n");
+    for (i = 0; i < l; i++) {
+        ptr[i] = (rand() / 2000);
+        printf("order %02d\tvalue: %d\n", (i + 1), ptr[i]);
+    }
+
+    sortByExchange(ptr, l);
+    printf("Array Integer sorted:\n");
+    printArrayInteger(ptr, l);
+    free(ptr);
 }
 
 void testArrayFloat() {

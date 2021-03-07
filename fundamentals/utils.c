@@ -30,3 +30,58 @@ int selectMenu(const char *items[], int len) {
     scanf("%d", &option);
     return option;
 }
+
+void quicksort(int *number,int first,int last) {
+   int i, j, pivot, temp;
+
+   if (first < last) {
+      pivot=first;
+      i=first;
+      j=last;
+
+      while(i<j) {
+         while(number[i]<=number[pivot]&&i<last)
+            i++;
+         while(number[j]>number[pivot])
+            j--;
+         if(i<j){
+            temp=number[i];
+            number[i]=number[j];
+            number[j]=temp;
+         }
+      }
+
+      temp=number[pivot];
+      number[pivot]=number[j];
+      number[j]=temp;
+      quicksort(number,first,j-1);
+      quicksort(number,j+1,last);
+   }
+}
+
+/************************/
+/*** Sort By Exchange ***/
+/************************/
+void flipValues(int *a, int *b) {
+    int aux = *a;
+    *a = *b;
+    *b = aux;
+}
+
+void sortByExchange(int items[], int len) {
+    int i, j = 0;
+    for (i = 0; i < (len -1); i++) {
+        for (j = i + 1; j < len; j++) {
+            if (items[i] > items[j]) {
+                flipValues(&items[i], &items[j]);
+            }
+        }
+    }
+}
+
+void printArrayInteger(int items[], int len) {
+    int i = 0; 
+    for (i = 0; i < len; i++) {
+        printf("order %03\t value: %d\n", i, items[i]);
+    }
+}
