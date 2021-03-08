@@ -62,7 +62,7 @@ void quicksort(int *number,int first,int last) {
 /************************/
 /*** Sort By Exchange ***/
 /************************/
-void flipValues(int *a, int *b) {
+void exchangeValues(int *a, int *b) {
     int aux = *a;
     *a = *b;
     *b = aux;
@@ -73,7 +73,7 @@ void sortByExchange(int items[], int len) {
     for (i = 0; i < (len -1); i++) {
         for (j = i + 1; j < len; j++) {
             if (items[i] > items[j]) {
-                flipValues(&items[i], &items[j]);
+                exchangeValues(&items[i], &items[j]);
             }
         }
     }
