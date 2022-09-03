@@ -31,22 +31,18 @@ char *duplicateString(char *source) {
     return result;
 }
 
-void addItemToArray(char **ptr, char *value, int index) {
+void addItemToArray(char **ptr, const char *value, int index) {
     unsigned long len = strlen(value);
     ptr[index] = (char*)malloc(sizeof(char) * (len + 1));
     memset(ptr[index], 0, len + 1);
     strncpy(ptr[index], value, len);
 }
 
-void stringsSwap(char *a, char *b) {
-    char *tmp = duplicateString(a);
-    free(a);
-    
-    a = duplicateString(b);
-    free(b);
-    
-    b = duplicateString(tmp);
-    free(tmp);
+void stringsSwap(char *ptr[], int i, int j) {
+    char *temp;
+    temp   = ptr[i];
+    ptr[i] = ptr[j];
+    ptr[j] = temp;
 }
 
 void printArrayOfInteger(int *ptr, int len) {
@@ -98,7 +94,7 @@ void sortStringList(char *ptr[], int len) {
     for (i = 0; i < (len - 1); i++) {
         for (j = i + 1; j < len; j++) {
             if (strcmp(ptr[i], ptr[j]) > 0) {
-                stringsSwap(ptr[i], ptr[j]);
+                stringsSwap(ptr, i, j);
             }
         }
     }

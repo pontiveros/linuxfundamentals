@@ -7,8 +7,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "datatypes.h"
 #include "utils.h"
+
 
 #define CITY_LIST_SIZE 10
 
@@ -64,15 +66,36 @@ void testArrayStrings() {
     printf("String array unsorted\n");
     printArrayOfStrings(ptr, CITY_LIST_SIZE);
     sortStringList(ptr, CITY_LIST_SIZE);
+    
     printf("String array sorted\n");
     printArrayOfStrings(ptr, CITY_LIST_SIZE);
 }
 
+void experiment3(const char *source, char** out) {
+    unsigned long len = strlen(source);
+    *out = (char*)malloc(sizeof(char) * (len + 1));
+    memset(*out, 0, len + 1);
+    strncpy(*out, source, len);
+}
+
+void thirdExperiment() {
+    char **outValue = (char**)malloc(sizeof(char*));
+    experiment3("My name is Pedro Ontiveros", outValue);
+    printf("Hello, this is the new value: %s.\n", *outValue);
+    
+    free(*outValue);
+    experiment3("this is another value", outValue);
+    printf("Hello, this is the new value: %s.\n", *outValue);
+}
+
+
+    
 int main(int argc, const char * argv[]) {
-    /* datatypes(); */
+    /* datatypes();        */
     /* testArrayInteger(); */
-    /* testArrayDouble(); */
+    /* testArrayDouble();  */
     testArrayStrings();
+    /* thirdExperiment();  */
     printf("\n***** End of program ***** \n");
     return (EXIT_SUCCESS);
 }

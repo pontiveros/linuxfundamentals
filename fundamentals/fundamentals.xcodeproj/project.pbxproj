@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1C02130025F4A15400DC4173 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C0212FF25F4A15400DC4173 /* main.c */; };
+		1C02130D25F4A3E300DC4173 /* datatypes.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C02130C25F4A3E300DC4173 /* datatypes.c */; };
+		1C02131125F4A50200DC4173 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C02131025F4A50200DC4173 /* utils.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,10 @@
 /* Begin PBXFileReference section */
 		1C0212FC25F4A15400DC4173 /* fundamentals */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = fundamentals; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C0212FF25F4A15400DC4173 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		1C02130B25F4A3E300DC4173 /* datatypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = datatypes.h; sourceTree = "<group>"; };
+		1C02130C25F4A3E300DC4173 /* datatypes.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = datatypes.c; sourceTree = "<group>"; };
+		1C02130F25F4A50200DC4173 /* utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
+		1C02131025F4A50200DC4173 /* utils.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,10 @@
 			isa = PBXGroup;
 			children = (
 				1C0212FF25F4A15400DC4173 /* main.c */,
+				1C02130B25F4A3E300DC4173 /* datatypes.h */,
+				1C02130C25F4A3E300DC4173 /* datatypes.c */,
+				1C02130F25F4A50200DC4173 /* utils.h */,
+				1C02131025F4A50200DC4173 /* utils.c */,
 			);
 			path = fundamentals;
 			sourceTree = "<group>";
@@ -118,7 +128,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C02131125F4A50200DC4173 /* utils.c in Sources */,
 				1C02130025F4A15400DC4173 /* main.c in Sources */,
+				1C02130D25F4A3E300DC4173 /* datatypes.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +254,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8GPVK4482L;
 				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_C_LANGUAGE_STANDARD = c11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -252,6 +265,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8GPVK4482L;
 				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_C_LANGUAGE_STANDARD = c11;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
