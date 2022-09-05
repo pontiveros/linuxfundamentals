@@ -1,0 +1,20 @@
+code:	10
+Name:	Running Pro
+Price:	122.45
+
+code:	20
+Name:	Tennis Adv Evolution
+Price:	125.88
+
+code:	30
+Name:	Running Elemental
+Price:	102.12
+
+code:	40
+Name:	Tennis Junior
+Price:	98.33
+
+code:	55
+Name:	Tempo Evolution 1
+Price:	88.45
+

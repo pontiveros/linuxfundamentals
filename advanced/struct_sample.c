@@ -22,20 +22,44 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "tnode.h"
 
-#define EMPTY "EMPTY"
-#define SIZE_E 5
+struct TNode *pStack = NULL;
 
-struct TProduct {
-    int code;
-    float price;
-    char* name;
-};
+void PrintNode(struct TNode* product);
 
-struct TProduct* CreateTProduct(int code, float price, const char *pszName) {
-    struct TProduct *ptr = (struct TProduct*)malloc(sizeof(struct TProduct));
+void push(struct TNode *node) 
+{
+    if (pStack == NULL) {
+        pStack = node;
+    } else {
+        node->next = pStack;
+        pStack = node;
+    }
+}
+
+void pop() 
+{
+    if (pStack != NULL) {
+        if (pStack->next == NULL) {
+            free(pStack);
+            pStack = NULL;
+        } else {
+            struct TNode *node = pStack;
+
+            pStack = node->next;
+
+            free(node);
+            node = NULL;
+        }
+    }
+}
+
+struct TNode* CreateNode(int code, float price, const char *pszName) {
+    struct TNode *ptr = (struct TNode*)malloc(sizeof(struct TNode));
     ptr->code  = code;
     ptr->price = price;
+    ptr->next  = NULL;
 
     if (pszName != NULL) {
         unsigned int nSize = strlen(pszName);
@@ -49,36 +73,40 @@ struct TProduct* CreateTProduct(int code, float price, const char *pszName) {
     return ptr;
 }
 
-void DeleteTProduct(struct TProduct * product) 
+void PrintStack() 
 {
-    if (product != NULL) {
-        if (product->name != NULL) {
-            free(product->name);
-            product->name = NULL;
-        }
-
-        free(product);
-        product = NULL;
+    for (struct TNode *ptr = pStack; ptr != NULL; ptr = ptr->next) {
+        PrintNode(ptr);
     }
 }
 
-void PrintProduct(struct TProduct* product) 
+void PrintNode(struct TNode* product) 
 {
     if (product != NULL) {
         printf("Code: %d\n", product->code);
         printf("Name: %s\n", product->name);
-        printf("Price: %f\n", product->price);
+        printf("Price: %.2f\n", product->price);
     } else {
         printf("Product is empty.\n");
     }
+
+    printf("\n");
 }
 
 int main (int argc, char* argv[]) 
 {
-    struct TProduct* product = CreateTProduct(100, 12.34, "Tornillo para madera");
-    PrintProduct(product);
-    DeleteTProduct(product);
-    PrintProduct(product);
+    push(CreateNode(1000, 1.25, "Construction Screw for wood"));
+    push(CreateNode(1001, 3.22, "Exterior Screw for metal"));
+    push(CreateNode(1002, 12.09, "Drywall scree"));
+    push(CreateNode(1003, 6.27, "Arandela de presion"));
+    push(CreateNode(1004, 4.35, "Arandela plana de plastico"));
+
+    PrintStack();
+
+    pop();pop();pop();
+    printf("Remove 3 items.\n");
+    PrintStack();
     printf("*** end of program ***\n");
+    
     return EXIT_SUCCESS;
 }
